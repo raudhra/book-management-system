@@ -13,7 +13,6 @@ func Connect() {
 	d, err := gorm.Open("mysql", "raudhra:yaegar001/simplerest?charset=utf8&parseTime=True&loc=Local")
 	if err != nil {
 		panic(err)
-		return
 	}
 	db = d
 }
