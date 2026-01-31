@@ -9,6 +9,7 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/raudhra/book-management-system/models"
+	"github.com/raudhra/book-management-system/utils"
 )
 
 var NewBooks models.Books
@@ -26,10 +27,20 @@ func GetBookById(w http.ResponseWriter, r *http.Request) {
 	bookID := vars["bookID"]
 	ID, err := strconv.ParseInt(bookID, 0, 0)
 	if err != nil {
-		fmt.Println("Error")
+		fmt.Println("Error While Parsing")
 	}
 	bookDetails := models.GetBookById(ID)
 	res, _ := json.Marshal(bookDetails)
+	w.Header().Set("Content-Type", "pkglication/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write(res)
+}
+
+func CreateBook(w http.ResponseWriter, r *http.Request) {
+	CreateBook := &models.Book{}
+	utils.ParseBody(r, CreateBook)
+	b := CreateBook.CreateBook()
+	res, _ := json.Marshal(b)
 	w.Header().Set("Content-Type", "pkglication/json")
 	w.WriteHeader(http.StatusOK)
 	w.Write(res)
