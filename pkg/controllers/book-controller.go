@@ -3,7 +3,6 @@ package controllers
 import (
 	"encoding/json"
 	"fmt"
-	"gorilla/mux"
 	"net/http"
 	"strconv"
 
